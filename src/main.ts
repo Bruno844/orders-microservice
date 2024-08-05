@@ -10,9 +10,9 @@ async function bootstrap() {
 
   //aca siempre configuramos para que este backend sea un microservicio,lo pasamos a un microservicio
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,{
-    transport: Transport.TCP,
+    transport: Transport.NATS,
     options:{
-      port: envs.port
+      servers: envs.natsServers
     }
   });
 
@@ -27,7 +27,7 @@ async function bootstrap() {
 
   
   await app.listen();
-  logger.log('server runnin in' + envs.port)
+  logger.log(' ORDERS-MICROSERVICE server running in' + envs.port)
 
 
 
